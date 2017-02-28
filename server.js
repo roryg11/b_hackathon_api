@@ -38,6 +38,9 @@ var Todo = mongoose.model('Todo', {
 
   app.get("/api/datasummary", function(req, res){
     request("http://localhost:8080/rest/a/enhanced_account/datasummary/basic", function (error, response, body) {
+        if(error){
+          console.log(error);
+        }
         if (!error && response.statusCode == 200) {
             console.log(body);
          }
