@@ -20,23 +20,13 @@
     </div>
     <div class="" id="todo-list" class="row">
       <div class="col-sm-4 col-sm-offset-4">
-        <div class="check-box" ng-repeat="todo in todos">
-          <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)"/> {{todo.text}}
-          </label>
+        <button ng-click="getData()">Get Data<button>
+        <div class="row" ng-if="dataSummary">
+          <p>{{dataSummary}}</p>
         </div>
 
       </div>
     </div>
-    <div id="todo-form" class="row">
-      <form>
-        <div class="form-group">
-          <input type="text" class="form-control input-lg text-center" placeholder="puppies" ng-model="formData.text"/>
-          <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-        </div>
-      </form>
-    </div>
-
   </div>
 </body>
 </html>

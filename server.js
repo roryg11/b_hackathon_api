@@ -16,20 +16,12 @@ app.use(methodOverride());
 
 // routes =================================
 
-  app.get("/api/datasummary", function(req, res){
-    request("http://localhost:8080/rest/a/enhanced_account/datasummary/basic", function (error, response, body) {
-        if(error){
-          console.log(error);
-        }
-        if (!error && response.statusCode == 200) {
-            console.log(body);
-         }
-    });
+  app.get("/api/getSummary", function(req, res){
   });
 
   // application -------------------------------------
-  app.get("*", function(req,res){
-    res.sendFile('./public/index.html');
+  app.get("/home", function(req,res){
+    res.sendFile(__dirname + '/public/index.html');
   });
 
 app.listen(7060);
