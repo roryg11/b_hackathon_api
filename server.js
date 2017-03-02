@@ -17,6 +17,20 @@ app.use(methodOverride());
 // routes =================================
 
   app.get("/api/getSummary", function(req, res){
+      var options = {
+          url: "",
+          method: "GET",
+          headers: {
+              Cookie: "",
+              "X-XSRF-TOKEN": ""
+          }
+      };
+    request(options, function(error, response, body){
+        if(error){
+        console.log(error);
+        }
+        res.send(body);
+    });
   });
 
   // application -------------------------------------
