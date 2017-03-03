@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var request = require('request');
 var google = require('googleapis');
+var readProperties = require('./services/readPropertiesService.js')();
 
 // configuration
 app.use(express.static(__dirname + '/public'));
@@ -19,11 +20,11 @@ app.use(methodOverride());
 
   app.get("/api/getSummary", function(req, res){
       var options = {
-          url: "",
+          url: "https://app.beckon.com/rest/a/QA/datasummary/basic",
           method: "GET",
           headers: {
-              Cookie: "",
-              "X-XSRF-TOKEN": ""
+              Cookie: readProperties["com.beckon.jSessionId"],
+              "X-XSRF-TOKEN": readProperties["com.beckon.xsrfToken"]
           }
       };
     request(options, function(error, response, body){
@@ -33,6 +34,46 @@ app.use(methodOverride());
         res.send(body);
     });
   });
+
+    app.get("/api/dashboards", function(req, res){
+        var options = {
+            url: "https://app.beckon.com/rest/a/QA/dashboard/list",
+            method: "GET",
+            headers: {
+                Cookie: readProperties["com.beckon.jSessionId"],
+                "X-XSRF-TOKEN": readProperties["com.beckon.xsrfToken"],
+                "Content-Type": "application/json",
+                "Accept": "application/json, text/plain, */*"
+            }
+        };
+        request(options, function(error, response, body){
+            if(error){
+                console.log(error);
+            }
+            console.log(response);
+            res.send(body);
+        });
+    });
+
+app.get("/api/scorecards", function(req, res){
+    var options = {
+        url: "https://app.beckon.com/rest/a/QA/scorecards",
+        method: "GET",
+        headers: {
+            Cookie: readProperties["com.beckon.jSessionId"],
+            "X-XSRF-TOKEN": readProperties["com.beckon.xsrfToken"],
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/plain, */*"
+        }
+    };
+    request(options, function(error, response, body){
+        if(error){
+            console.log(error);
+        }
+        console.log(response);
+        res.send(body);
+    });
+});
 
 // google analytics
 var OAuth2Client = google.auth.OAuth2,
