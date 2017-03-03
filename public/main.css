@@ -5,12 +5,14 @@ html {
 body {
   font-family: 'Roboto', sans-serif;
   padding-top: 25px;
-  background:url("/images/watercolor-texture.jpg");
-  background-blend-mode: luminosity;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: rgba(240,240,240,1);
+  background: -moz-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(240,240,240,1)), color-stop(0%, rgba(219,219,219,1)), color-stop(53%, rgba(254,254,254,1)), color-stop(100%, rgba(240,240,240,1)));
+  background: -webkit-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: -o-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: -ms-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: linear-gradient(to right, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#f0f0f0', GradientType=1 );
 }
 #todo-list {margin-bottom: 30px}
 
@@ -57,11 +59,55 @@ p {
   mix-blend-mode: multiply;
 }
 
+.animation-background {
+  background-blend-mode: multiply;
+  width: 100%;
+  background-image: url("/images/maze_graphic.png");
+  background-size: cover;
+}
+
 @keyframes dash {
   to {
     stroke-dashoffset: 0;
   }
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    font-size: 0;
+  }
+
+  100% {
+    opacity: 1;
+    font-size: 12rem;
+  }
+}
+
+.stat {
+  animation-duration: 2s;
+  animation-name: fadeIn;
+  font-size: 12rem;
+}
+
+.slide-from-right {
+  transform: translateX(100px);
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 
 .frame {
   min-height: 500px;

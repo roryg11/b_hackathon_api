@@ -64,24 +64,24 @@
     };
 
     var previouslyAppliedColor = "color-white";
-    var path = angular.element.find('#wanderer')[0];
-    var pathLength = path.getTotalLength();
-    path.style.strokeDasharray = pathLength + ' ' + pathLength;
-    path.style.strokeDashoffset = pathLength;
+    // var path = angular.element.find('#wanderer')[0];
+    // var pathLength = path.getTotalLength();
+    // path.style.strokeDasharray = pathLength + ' ' + pathLength;
+    // path.style.strokeDashoffset = pathLength;
 
     angular.element($window).bind("scroll", function(e) {
-      console.log("OFFSET");
-      console.log($window.pageYOffset);
-      var scrollPercentage = ($window.pageYOffset) / ($window.innerHeight - $window.pageYOffset);
-      console.log("SCROLL PERCENTAGE");
-      console.log(scrollPercentage ); 
-      var drawLength = pathLength * scrollPercentage;
-      path.style.strokeDashoffset = pathLength - drawLength;
-      if (scrollPercentage >= 0.99) {
-        path.style.strokeDasharray = "none";
-      } else {
-        path.style.strokeDasharray = pathLength + ' ' + pathLength;
-      }
+      // console.log("OFFSET");
+      // console.log($window.pageYOffset);
+      // var scrollPercentage = ($window.pageYOffset) / ($window.innerHeight - $window.pageYOffset);
+      // console.log("SCROLL PERCENTAGE");
+      // console.log(scrollPercentage );
+      // var drawLength = pathLength * scrollPercentage;
+      // path.style.strokeDashoffset = pathLength - drawLength;
+      // if (scrollPercentage >= 0.99) {
+      //   path.style.strokeDasharray = "none";
+      // } else {
+      //   path.style.strokeDasharray = pathLength + ' ' + pathLength;
+      // }
     });
   });
 
