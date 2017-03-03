@@ -27,7 +27,12 @@
         <div ng-if="dashboardSummary">
           <h3>Your dashboards...</h3>
           <div><h1>{{numberOfDashboards}}</h1><h3> Dashboards Tracking Your Marketing Data</h3></div>
-          <div><h3>Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 4"> {{$index + 1}}. {{owner[0]}}</h4></div>
+          <div><h3>Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
+        </div>
+        <div ng-if="scorecardSummary">
+          <h3>You Scorecards... </h3>
+          <div><h1>{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
+          <div><h3>Scorecard Samurai</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
         </div>
         <div class="col-lg-12 container-to-recolor color-white"ng-if="dataSummary">
           <h3>You had...</h3>
