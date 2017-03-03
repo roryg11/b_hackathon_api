@@ -57,6 +57,12 @@
       });
     };
 
+    $scope.getGoogleAnalytics = function () {
+      $http.get('/googleAnalytics').then(function(response) {
+        $scope.googleAnalytics = response.data;
+      });
+    };
+
     var previouslyAppliedColor = "color-white";
     var path = angular.element.find('#wanderer')[0];
     var pathLength = path.getTotalLength();
