@@ -63,26 +63,57 @@
       });
     };
 
-    var previouslyAppliedColor = "color-white";
+
+
+    var zeroPanel = angular.element.find("#frame1")[0].offsetTop;
+
+    angular.element($window).bind("scroll", function(e) {
+      if ($window.pageYOffset > zeroPanel && $window.pageYOffset < zeroPanel + 500) {
+        console.log("in first frame");
+      } else if ($window.pageYOffset > zeroPanel + 500 && $window.pageYOffset < zeroPanel + 500*2) {
+        console.log("in second frame");
+        //fill hours at beckon chart
+        angular.element('progress-fill').each(function(){
+          var minuteValue = this.html();
+          var value = minuteValue.split(0, minuteValue.length- 8);
+          this.parent().css('width', value);
+        });
+      } else if ($window.pageYOffset > zeroPanel + 500*2 && $window.pageYOffset < zeroPanel + 500*3) {
+        console.log("in third frame");
+      } else if ($window.pageYOffset > zeroPanel + 500*3 && $window.pageYOffset < zeroPanel + 500*4) {
+        console.log("in fourth frame");
+      } else if ($window.pageYOffset > zeroPanel + 500*4 && $window.pageYOffset < zeroPanel + 500*5) {
+        console.log("in fifth frame");
+      } else if ($window.pageYOffset > zeroPanel + 500*5 && $window.pageYOffset < zeroPanel + 500*6) {
+        console.log("in sixth frame");
+      } else if ($window.pageYOffset > zeroPanel + 500*6 && $window.pageYOffset < zeroPanel + 500*7) {
+        console.log("in seventh frame");
+      } else if ($window.pageYOffset > zeroPanel + 500*7 && $window.pageYOffset < zeroPanel + 500*8) {
+        console.log("in eigth frame");
+      }
+    });
+
+    // var previouslyAppliedColor = "color-white";
     // var path = angular.element.find('#wanderer')[0];
     // var pathLength = path.getTotalLength();
     // path.style.strokeDasharray = pathLength + ' ' + pathLength;
     // path.style.strokeDashoffset = pathLength;
-
-    angular.element($window).bind("scroll", function(e) {
-      // console.log("OFFSET");
-      // console.log($window.pageYOffset);
-      // var scrollPercentage = ($window.pageYOffset) / ($window.innerHeight - $window.pageYOffset);
-      // console.log("SCROLL PERCENTAGE");
-      // console.log(scrollPercentage );
-      // var drawLength = pathLength * scrollPercentage;
-      // path.style.strokeDashoffset = pathLength - drawLength;
-      // if (scrollPercentage >= 0.99) {
-      //   path.style.strokeDasharray = "none";
-      // } else {
-      //   path.style.strokeDasharray = pathLength + ' ' + pathLength;
-      // }
-    });
+    //
+    // angular.element($window).bind("scroll", function(e) {
+    //   console.log("OFFSET");
+    //   console.log($window.pageYOffset);
+    //   var scroll = $window.pageYOffset + ($window.innerHeight/3);
+    //   var scrollPercentage = ($window.pageYOffset) / ($window.innerHeight - $window.pageYOffset);
+    //   console.log("SCROLL PERCENTAGE");
+    //   console.log(scrollPercentage );
+    //   var drawLength = pathLength * scrollPercentage;
+    //   path.style.strokeDashoffset = pathLength - drawLength;
+    //   if (scrollPercentage >= 0.99) {
+    //     path.style.strokeDasharray = "none";
+    //   } else {
+    //     path.style.strokeDasharray = pathLength + ' ' + pathLength;
+    //   }
+    // });
   });
 
 

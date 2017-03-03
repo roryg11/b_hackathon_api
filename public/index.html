@@ -22,59 +22,112 @@
           <div class="span-12" id="todo-list">
           <div ng-if="googleAnalytics">
             <div class="frame col-lg-12"  id="frame1">
-              <h1 class="stat">{{googleAnalytics.totalHoursSpent}}</h1>
-              <h3 class="slide-from-right">minutes spent in Beckon this year</h3>
+                <div ng-if="googleAnalytics">
+                    <h1>{{googleAnalytics.totalHoursSpent}} minutes</h1>
+                    <h3>Total time spent in Beckon this year</h3>
+                </div
+                <h1 class="stat">{{googleAnalytics.totalHoursSpent}}</h1>
+                <h3 class="slide-from-right">minutes spent in Beckon this year</h3>
                 <!--<div class="animation-background">-->
-                    <!--<svg class="cls-1 wanderer" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 942.35 419.43"><title>maze_graphic</title><path class="cls-1" d="M100.5,883.5s60,7,80,0,75-8,106,38,71.5,20.5,92-5,25-114-43-128c-36-3-99,25-118-40s59-100,85-112,122-6,126,97,37,142,76,104,18-150,18-150-2-32,42-37,70.5,68.5,71,101C626,814,560,822,476.5,894.5s-17.5,123.5,5,135c73.5,26.5,191,19,246-15S763,923,755,900s-57-70-72.5-129.5C674.69,740.5,692,660,774,677c63,27,49.34,67.4,85,78,37,11,56-29,108.5-35.5,68-14,70,50,70,50s4.5,64.5,0,103S1025,1019,922,1002c-82.5-14.5-93-37-100-53s-22-63,23-99,76-37,92-33l.08-.24c26,7.74,44.92,30.89,44.92,58.24,0,33.69-28.65,61-64,61s-64-27.31-64-61c0-15.73,13.38-38.44,33.12-51.25" transform="translate(-100.15 -629.03)"/></svg>-->
+                <!--<svg class="cls-1 wanderer" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 942.35 419.43"><title>maze_graphic</title><path class="cls-1" d="M100.5,883.5s60,7,80,0,75-8,106,38,71.5,20.5,92-5,25-114-43-128c-36-3-99,25-118-40s59-100,85-112,122-6,126,97,37,142,76,104,18-150,18-150-2-32,42-37,70.5,68.5,71,101C626,814,560,822,476.5,894.5s-17.5,123.5,5,135c73.5,26.5,191,19,246-15S763,923,755,900s-57-70-72.5-129.5C674.69,740.5,692,660,774,677c63,27,49.34,67.4,85,78,37,11,56-29,108.5-35.5,68-14,70,50,70,50s4.5,64.5,0,103S1025,1019,922,1002c-82.5-14.5-93-37-100-53s-22-63,23-99,76-37,92-33l.08-.24c26,7.74,44.92,30.89,44.92,58.24,0,33.69-28.65,61-64,61s-64-27.31-64-61c0-15.73,13.38-38.44,33.12-51.25" transform="translate(-100.15 -629.03)"/></svg>-->
 
                 <!--</div>-->
             </div>
+            </div>
             <div class="frame col-lg-12" id="frame2">
-                <div>
-                    <h3>Top Beckon Users</h3>
-                </div>
-                <div>
+                <div ng-if="googleAnalytics">
                     <h4 ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
+                    <div class="bar-container horizontal flat">
+                        <h3>Top Beckon Users</h3>
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[0][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[1][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[2][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[3][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[4][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="frame col-lg-12" id="frame3">
-                <h1>{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
-                <h3>The most popular day of the week to use Beckon!</h3>
+                <div ng-if="googleAnalytics">
+                    <h1>{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
+                    <h3>The most popular day of the week to use Beckon!</h3>
+                </div>
             </div>
             <div class="frame col-lg-12" id="frame4">
-              <h1>{{googleAnalytics.newUsers}}</h1>
-            <div class="svg-line">
-                <svg width="200" height="200">
-                    <line class="top" x1="0" y1="0" x2="600" y2="0"/>
-                    <line class="left" x1="0" y1="200" x2="0" y2="-400"/>
-                    <line class="bottom" x1="200" y1="200" x2="-400" y2="200"/>
-                    <line class="right" x1="200" y1="0" x2="200" y2="600"/>
-                </svg>
-            </div>
-              <h3>Number of new users who logged in this year</h3>
+                <div ng-if="googleAnalytics">
+                    <div class="svg-line">
+                        <svg width="200" height="200">
+                            <line class="top" x1="0" y1="0" x2="600" y2="0"/>
+                            <line class="left" x1="0" y1="200" x2="0" y2="-400"/>
+                            <line class="bottom" x1="200" y1="200" x2="-400" y2="200"/>
+                            <line class="right" x1="200" y1="0" x2="200" y2="600"/>
+                        </svg>
+                    </div>
+                    <h1>{{googleAnalytics.newUsers}}</h1>
+
+                    <h3>Number of new users who logged in this year</h3>
+                </div>
             </div>
           </div>
           <div ng-if="dashboardSummary && scorecardSummary">
             <div class="frame col-lg-12" id="frame5">
-              <div><h1>{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
-              <div><h1>{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
+                <div ng-if="dashboardSummary && scorecardSummary">
+                    <div><h1>{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
+                    <div><h1>{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
+                </div>
             </div>
             <div class="frame col-lg-12" id="frame6">
-              <div><h3>Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
-              <div><h3>Scorecard Samurai</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
+                <div ng-if="dashboardSummary && scorecardSummary">
+                    <div><h3>Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
+                    <div><h3>Scorecard Samurai</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
+                </div>
             </div>
-          </div>
-          <div class="frame col-lg-12" ng-if="dataSummary" id="frame7">
-              <h3>You had...</h3>
-              <div class="element-color" data-color="1-2"><h1 class="stat">{{dataSummary.totalChannelMetrics}}</h1> <h3>Channel Metrics</h3></div>
-              <div class="element-color" data-color="2-3"><h1>{{dataSummary.totalChannels}}</h1> <h3>Channels</h3></div>
-              <div class="element-color" data-color="3-4"><h1>{{dataSummary.totalDimensions}}</h1> <h3>Dimensions</h3></div>
-              <div class="element-color" data-color="4-5"><h1>{{dataSummary.totalDimensionInstances}}</h1> <h3>Dimension Instances</h3></div>
-              <div class="element-color" data-color="5-6"><h1>{{dataSummary.totalTimeSeries}}</h1> <h3>Time Series</h3></div>
-              <div class="element-color" data-color="6-7"><h1>{{dataSummary.totalDataPoints}}</h1> <h3>Total Data Points</h3></div>
+          <div class="frame col-lg-12" id="frame7">
+              <div ng-if="dataSummary">
+                  <h3>You had...</h3>
+                  <div data-color="1-2"><h3 class="stat">{{dataSummary.totalChannelMetrics}}</h3> <h5>Channel Metrics</h5></div>
+                  <div data-color="2-3"><h3>{{dataSummary.totalChannels}}</h3> <h5>Channels</h5></div>
+                  <div data-color="3-4"><h3>{{dataSummary.totalDimensions}}</h3> <h5>Dimensions</h5></div>
+              </div>
           </div>
           <div class="frame col-lg-12" id="frame8">
-            What will next year hold?
+              <div data-color="4-5"><h3>{{dataSummary.totalDimensionInstances}}</h3> <h5>Dimension Instances</h5></div>
+              <div data-color="5-6"><h3>{{dataSummary.totalTimeSeries}}</h3> <h5>Time Series</h5></div>
+              <div data-color="6-7"><h3>{{dataSummary.totalDataPoints}}</h3> <h5>Total Data Points</h5></div>
+              <div><h3>What will next year hold?</h3></div>
           </div>
             <button class="btn" ng-click="getData()">Get Data</button>
             <button class="btn" ng-click="getDashboardsList()">Get Dashboard Summary</button>
