@@ -72,7 +72,6 @@
     angular.element($window).bind("scroll", function(e) {
       console.log("OFFSET");
       console.log($window.pageYOffset);
-      var scroll = $window.pageYOffset + ($window.innerHeight/3);
       var scrollPercentage = ($window.pageYOffset) / ($window.innerHeight - $window.pageYOffset);
       console.log("SCROLL PERCENTAGE");
       console.log(scrollPercentage ); 

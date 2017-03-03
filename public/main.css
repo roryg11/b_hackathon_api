@@ -6,21 +6,13 @@ body {
   font-family: 'Roboto', sans-serif;
   padding-top: 25px;
   background:url("/images/watercolor-texture.jpg");
+  background-blend-mode: luminosity;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 #todo-list {margin-bottom: 30px}
-
-@keyframes beckonFade {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
 
 p h1 h2 h3 h4 h5 h6 div span {
   font-family: 'Lato', sans-serif;
@@ -50,17 +42,26 @@ p {
   font-size: .75rem;
 }
 
-/*.cls-1 {*/
-  /*stroke-dasharray: 8000;*/
-  /*stroke-dashoffset: 8000;*/
-  /*animation: dash 10s linear forwards;*/
-/*}*/
+.wanderer {
+  stroke-dasharray: 8000;
+  stroke-dashoffset: 8000;
+  animation: dash 10s linear forwards;
+  color: red;
+  mix-blend-mode:multiply;
+}
 
-/*@keyframes dash {*/
-  /*to {*/
-    /*stroke-dashoffset: 0;*/
-  /*}*/
-/*}*/
+.cls-1 {
+  fill:none;stroke: red;
+  stroke-miterlimit:10;
+  stroke-width:6px;
+  mix-blend-mode: multiply;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 
 .element-color {
   min-height: 60vh;
