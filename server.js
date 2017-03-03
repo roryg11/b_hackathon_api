@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var request = require('request');
 var google = require('googleapis');
+var moment = require('moment');
 var readProperties = require('./services/readPropertiesService.js')();
 
 // configuration
@@ -75,11 +76,78 @@ app.get("/api/scorecards", function(req, res){
     });
 });
 
-// google analytics
+app.get("/googleAnalytics", function (req, res) {
+    var newUsers, usageData, mostPopularDayOfWeek;
+
+    getNewUsers(function (err, data) {
+        getMostPopularDayOfWeek(function (err, data) {
+            getUsageStats(function (err, data) {
+                if (err) {
+                    return console.log('An error occurred', err);
+                }
+
+                var usersWithUsage = data.rows,
+                    totalHoursSpent = data.totalsForAllResults["ga:sessionDuration"];
+                usersWithUsage.sort(function (a, b) {
+                    return  b[1] - a[1];
+                });
+
+                var nonSupportUsers = usersWithUsage.filter( function (user) {
+                    return user[0] !==  "app-support@beckon.com";
+                });
+
+               usageData = {
+                    topUsers: nonSupportUsers,
+                    totalHoursSpent: totalHoursSpent
+                };
+
+                return res.send({
+                    newUsers: newUsers,
+                    mostAvidUsers: usageData.topUsers,
+                    totalHoursSpent: usageData.totalHoursSpent,
+                    mostPopularDayOfWeek: mostPopularDayOfWeek
+                });
+            });
+            if (err) {
+                return console.log('An error occurred', err);
+            }
+            var usageDates = data.rows;
+            var dayTallies = [
+                {day: "Monday", time: 0},
+                {day: "Tuesday", time: 0},
+                {day: "Wednesday", time: 0},
+                {day: "Thursday", time: 0},
+                {day: "Friday", time: 0},
+                {day: "Saturday", time: 0},
+                {day: "Sunday", time: 0}
+            ];
+            for (var i = 0; i < usageDates.length; i++ ) {
+                var day = moment(usageDates[i][0], "YYYYMMDD").format('dddd');
+                for (var j = 0; j < dayTallies.length; j++ ) {
+                    if (dayTallies[j].day === day) {
+                        dayTallies[j].time += parseInt(usageDates[i][1]);
+                    }
+                }
+
+            }
+            dayTallies.sort(function (a, b) {
+                return  b.time - a.time;
+            });
+            mostPopularDayOfWeek = dayTallies;
+        });
+        if (err) {
+            return console.log('An error occurred', err);
+        }
+        return  newUsers = data.totalResults;
+    });
+
+});
+
+// google analytics ==============================================
 var OAuth2Client = google.auth.OAuth2,
     analytics = google.analytics('v3'),
-    CLIENT_ID = 'ENTER_CLIENT_ID',
-    CLIENT_SECRET = 'CLIENT_SECRET',
+    CLIENT_ID = readProperties["CLIENT_ID"],
+    CLIENT_SECRET = readProperties["CLIENT_SECRET"],
     REDIRECT_URL = 'http://localhost:7060/oauthcallback',
     oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
 
@@ -95,7 +163,8 @@ function getAccessToken () {
 }
 getAccessToken();
 
-function getNewUsers() {
+// GA calls
+function getNewUsers(callback) {
     analytics.data.ga.get({
         auth: oauth2Client,
         'ids': 'ga:59525543',
@@ -104,15 +173,22 @@ function getNewUsers() {
         'metrics': 'ga:newUsers',
         'dimensions': 'ga:dimension2',
         'filters':'ga:dimension1==QA'
-    }, function (err, data) {
-        if (err) {
-            return console.log('An error occurred', err);
-        }
-        console.log(data.totalResults);
-    });
+    }, callback);
 }
 
-function getMostAvidUser() {
+function getMostPopularDayOfWeek(callback) {
+    analytics.data.ga.get({
+        auth: oauth2Client,
+        'ids': 'ga:59525543',
+        "start-date": "2016-03-02",
+        "end-date": "2017-03-02",
+        'metrics': 'ga:sessionDuration',
+        'dimensions': 'ga:date',
+            'filters':'ga:dimension1==QA'
+    }, callback);
+}
+
+function getUsageStats(callback) {
     analytics.data.ga.get({
         auth: oauth2Client,
         'ids': 'ga:59525543',
@@ -121,14 +197,10 @@ function getMostAvidUser() {
         'metrics': 'ga:sessionDuration',
         'dimensions': 'ga:dimension2',
         'filters':'ga:dimension1==QA'
-    }, function (err, data) {
-        if (err) {
-            return console.log('An error occurred', err);
-        }
-        console.log(data);
-    });
+    }, callback);
 }
  
+//called after successfully authenticating
 app.get("/oauthcallback", function (req, res) {
     if (req.query) {
         oauth2Client.getToken(req.query.code, function (err, tokens) {
@@ -138,8 +210,6 @@ app.get("/oauthcallback", function (req, res) {
             // set tokens to the client
             // TODO: tokens should be set by OAuth2 client.
             oauth2Client.setCredentials(tokens);
-            getNewUsers();
-            getMostAvidUser();
         });
     }
     res.sendFile(__dirname + '/public/index.html');
