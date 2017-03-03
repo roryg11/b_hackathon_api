@@ -51,7 +51,6 @@ app.use(methodOverride());
             if(error){
                 console.log(error);
             }
-            console.log(response);
             res.send(body);
         });
     });
@@ -71,7 +70,6 @@ app.get("/api/scorecards", function(req, res){
         if(error){
             console.log(error);
         }
-        console.log(response);
         res.send(body);
     });
 });

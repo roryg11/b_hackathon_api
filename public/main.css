@@ -102,9 +102,8 @@ div>.stat:hover {
   width: 100%;
   padding: 10px;
   margin: 10px;
-  border-radius: 0px;
-  text-align: center;
   font-size: 5rem;
+  text-align: left;
   animation-name:expand-right-green;
   animation-duration:1s;
   animation-timing-function: ease;
@@ -113,14 +112,24 @@ div>.stat:hover {
   animation-play-state: paused;
 }
 
+.reverse-animation {
+  text-align:right;
+  animation-direction: reverse;
+}
+
 @keyframes expand-right-green {
   0%{
     color: transparent;
     width: 0%;
     background-color: green;
   }
+  97%{
+    color: transparent;
+    width: 98%;
+    background-color: green;
+  }
   98%{
-    color: black;
+    color: green;
     width: 98%;
     background-color: transparent;
   }
@@ -138,7 +147,7 @@ div>.stat:hover {
     background-color: yellow;
   }
   98%{
-    color: black;
+    color: transparent;
     width: 98%;
     background-color: yellow;
   }
@@ -149,7 +158,7 @@ div>.stat:hover {
   }
 }
 
-.reveal-container:hover {
+.reveal-container-right-green:hover {
   animation-play-state:running;
 }
 

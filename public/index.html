@@ -35,7 +35,7 @@
             </div>
             <div class="frame col-lg-12" id="frame2">
                 <div ng-if="googleAnalytics">
-                    <h4 ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
+                    <h4 class="reveal-container-right-green reverse-animation"ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
                     <div class="bar-container horizontal flat">
                         <h3>Top Beckon Users</h3>
                         <div class="progress-bar horizontal">
