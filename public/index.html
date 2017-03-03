@@ -4,27 +4,40 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
   <title>sample todo</title>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-  <link rel="stylesheet/less" href="/main.less" type="text/css" />
   <!-- <script src="http://lesscss.googlecode.com/files/less-1.0.30.min.js"></script> -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script><!-- load angular -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="main.css" type="text/css" />
   <script src="core.js"></script>
 </head>
-<body ng-controller="mainController">
-  <div>
-  </div>
+<body ng-app="todoApp" ng-controller="mainController" class="container-to-recolor color-white">
+<!--<div class="animation-thing"></div>-->
+<!--<div class="circle-animation"></div>-->
   <div class="container">
     <div class="jumbotron text-center">
-      <h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
+      <h1>Your Data In Review</h1>
     </div>
-    <div class="" id="todo-list" class="row">
-      <div class="col-sm-4 col-sm-offset-4">
-        <button ng-click="getData()">Get Data<button>
-        <div class="row" ng-if="dataSummary">
-          <p>{{dataSummary}}</p>
+    <div class="" id="todo-list">
+      <div class="span-12">
+        <button class="btn" ng-click="getData()">Get Data</button>
+        <button class="btn" ng-click="getDashboardsList()">Get Dashboard Summary</button>
+        <button class="btn" ng-click="getScorecardsList()">Get Scorecard Summary</button>
+        <div ng-if="dashboardSummary">
+          <h3>Your dashboards...</h3>
+          <div><h1>{{numberOfDashboards}}</h1><h3> Dashboards Tracking Your Marketing Data</h3></div>
+          <div><h3>Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 4"> {{$index + 1}}. {{owner[0]}}</h4></div>
         </div>
-
+        <div class="col-lg-12 container-to-recolor color-white"ng-if="dataSummary">
+          <h3>You had...</h3>
+          <div class="element-color" data-color="1-2"><h1 class="stat">{{dataSummary.totalChannelMetrics}}</h1> <h3>Channel Metrics</h3></div>
+          <div class="element-color" data-color="2-3"><h1>{{dataSummary.totalChannels}}</h1> <h3>Channels</h3></div>
+          <div class="element-color" data-color="3-4"><h1>{{dataSummary.totalDimensions}}</h1> <h3>Dimensions</h3></div>
+          <div class="element-color" data-color="4-5"><h1>{{dataSummary.totalDimensionInstances}}</h1> <h3>Dimension Instances</h3></div>
+          <div class="element-color" data-color="5-6"><h1>{{dataSummary.totalTimeSeries}}</h1> <h3>Time Series</h3></div>
+          <div class="element-color" data-color="6-7"><h1>{{dataSummary.totalDataPoints}}</h1> <h3>Total Data Points</h3></div>
+        </div>
       </div>
     </div>
   </div>
