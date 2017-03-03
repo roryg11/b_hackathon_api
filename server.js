@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var request = require('request');
 var google = require('googleapis');
+var moment = require('moment');
 
 // configuration
 app.use(express.static(__dirname + '/public'));
@@ -37,8 +38,8 @@ app.use(methodOverride());
 // google analytics
 var OAuth2Client = google.auth.OAuth2,
     analytics = google.analytics('v3'),
-    CLIENT_ID = 'ENTER_CLIENT_ID',
-    CLIENT_SECRET = 'CLIENT_SECRET',
+    CLIENT_ID = '712427025585-b5iuvur0ghitm6q8l4iis5ifmcluhfg9.apps.googleusercontent.com',
+    CLIENT_SECRET = 'uc-E5KkpQS1drbe4z1_rHjsH',
     REDIRECT_URL = 'http://localhost:7060/oauthcallback',
     oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
 
@@ -67,7 +68,39 @@ function getNewUsers() {
         if (err) {
             return console.log('An error occurred', err);
         }
-        console.log(data.totalResults);
+        console.log("Total users:" + data.totalResults);
+    });
+}
+
+function getMostPopularDayOfWeek() {
+    analytics.data.ga.get({
+        auth: oauth2Client,
+        'ids': 'ga:59525543',
+        "start-date": "2016-03-02",
+        "end-date": "2017-03-02",
+        'metrics': 'ga:sessionDuration',
+        'dimensions': 'ga:date',
+            'filters':'ga:dimension1==QA'
+    }, function (err, data) {
+        if (err) {
+            return console.log('An error occurred', err);
+        }
+        var usageDates = data.rows;
+        var dayTallies = {
+            "Monday": 0,
+            "Tuesday": 0,
+            "Wednesday": 0,
+            "Thursday": 0,
+            "Friday": 0,
+            "Saturday": 0,
+            "Sunday": 0
+        };
+        for (var i = 0; i < usageDates.length; i++ ) {
+             var day = moment(usageDates[i][0], "YYYYMMDD").format('dddd');
+            dayTallies[day] += parseInt(usageDates[i][1]);
+        }
+        console.log("Tallied dayes: " + dayTallies);
+
     });
 }
 
@@ -84,7 +117,21 @@ function getMostAvidUser() {
         if (err) {
             return console.log('An error occurred', err);
         }
-        console.log(data);
+
+        var usersWithUsage = data.rows,
+            totalHoursSpent = data.totalsForAllResults["ga:sessionDuration"];
+        usersWithUsage.sort(function (a, b) {
+            return  b[1] - a[1];
+        });
+
+        var nonSupportUsers = usersWithUsage.filter( function (user) {
+            return user[0] !==  "app-support@beckon.com";
+        });
+
+        var top5Users = nonSupportUsers.slice(0, 5);
+
+        console.log({topUsers: top5Users,
+            totalHoursSpent: totalHoursSpent});
     });
 }
  
@@ -99,6 +146,7 @@ app.get("/oauthcallback", function (req, res) {
             oauth2Client.setCredentials(tokens);
             getNewUsers();
             getMostAvidUser();
+            getMostPopularDayOfWeek();
         });
     }
     res.sendFile(__dirname + '/public/index.html');
