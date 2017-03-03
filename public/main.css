@@ -7,7 +7,6 @@ body {
   padding-top: 25px;
   background: rgba(240,240,240,1);
   background: -moz-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
-  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(240,240,240,1)), color-stop(0%, rgba(219,219,219,1)), color-stop(53%, rgba(254,254,254,1)), color-stop(100%, rgba(240,240,240,1)));
   background: -webkit-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
   background: -o-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
   background: -ms-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
@@ -84,18 +83,30 @@ p {
   }
 }
 
-div.stat {
-  font-size: 12rem;
-  animation: fadeIn .5s linear 1;
-  animation-play-state: paused;
+.title-stat {
+  font-size: 6rem;
+  width: 400px;
+  text-align: right
+  border-right: 3px solid gray;
 }
 
-div>.stat:hover {
-  animation-play-state: running;
+.title-stat::after{
+  content: "";
+  height: 100px;
+  width: 4px;
+  background-color: gray;
 }
 
-.slide-from-right {
-  transform: translateX(100px);
+.huge-stat{
+  font-size: 20rem;
+}
+
+.medium-stat{
+  font-size: 6rem;
+}
+
+.small-stat {
+  font-size: 3rem;
 }
 
 .reveal-container-right-green {
@@ -116,7 +127,7 @@ div>.stat:hover {
   width: 100%;
   padding: 10px;
   margin: 10px;
-  font-size: 3rem;
+  font-size: 1.5rem;
   text-align: left;
   animation-name:expand-right-yellow;
   animation-duration:1s;
@@ -133,6 +144,10 @@ div>.stat:hover {
 .reverse-animation {
   text-align:right;
   animation-direction: reverse;
+}
+
+.flex {
+  display: flex;
 }
 
 @keyframes expand-right-green {
