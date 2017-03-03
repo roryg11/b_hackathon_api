@@ -1,69 +1,71 @@
 <!doctype html>
 <html ng-app="todoApp">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
-  <title>sample todo</title>
-  <!-- <script src="http://lesscss.googlecode.com/files/less-1.0.30.min.js"></script> -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script><!-- load angular -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="main.css" type="text/css" />
-  <script src="core.js"></script>
-</head>
-<body ng-app="todoApp" ng-controller="mainController" class="container-to-recolor color-white">
-<!--<div class="animation-thing"></div>-->
-<!--<div class="circle-animation"></div>-->
-  <div class="container">
-    <div class="jumbotron text-center">
-      <h1>Your Year In Review with Beckon</h1>
-    </div>
-    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 408.76 940.63"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:6px;}</style></defs><title>maze_graphic</title><path id="wanderer" class="cls-1" d="M206.05-37.23s-7,60,0,80,8,75-38,106,5,92,5,92,114,25,128-43c3-36-25-99,40-118s100,59,112,85,6,122-97,126-142,37-104,76,150,18,150,18,32-2,37,42-82,78-101,71-118,13-143-159c-64-100-135,5-135,5s-19,191,15,246,116,32,139,24,74-69,105-69,111,9,94,91c-29,55-51,71-51,71s-22,30,8,123c14,68-50,70-50,70s-78-3-103,0-134-17-117-120,41-89,41-89,117-15,139,9c6.27,6.84-9.19,75.24,11,79,43,8,77.9,65.39,45,94-46,40-114-1-116-25s14-53,14-53,15.5-47.5,56.5-15.5" transform="translate(-51.76 37.57)"/></svg>
-    <div class="" id="todo-list">
-      <div class="span-12">
-        <button class="btn" ng-click="getData()">Get Data</button>
-        <button class="btn" ng-click="getDashboardsList()">Get Dashboard Summary</button>
-        <button class="btn" ng-click="getScorecardsList()">Get Scorecard Summary</button>
-        <button class="btn" ng-click="getGoogleAnalytics()">Get Google Analytics Summary</button>
-        <div ng-if="dashboardSummary">
-          <div><h1>{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
-          <div><h3>Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
+    <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+      <title>sample todo</title>
+      <!-- <script src="http://lesscss.googlecode.com/files/less-1.0.30.min.js"></script> -->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script><!-- load angular -->
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+      <link rel="stylesheet" href="main.css" type="text/css" />
+      <script src="core.js"></script>
+    </head>
+    <body ng-app="todoApp" ng-controller="mainController" class="container-to-recolor color-white">
+    <!--<div class="animation-thing"></div>-->
+    <!--<div class="circle-animation"></div>-->
+      <div class="container">
+        <div class="jumbotron text-center">
+          <h1>Your Year In Review with Beckon</h1>
         </div>
-        <div ng-if="scorecardSummary">
-          <div><h1>{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
-          <div><h3>Scorecard Samurai</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
-        </div>
-        <div class="col-lg-12 container-to-recolor color-white"ng-if="dataSummary">
-          <h3>You had...</h3>
-          <div class="element-color" data-color="1-2"><h1 class="stat">{{dataSummary.totalChannelMetrics}}</h1> <h3>Channel Metrics</h3></div>
-          <div class="element-color" data-color="2-3"><h1>{{dataSummary.totalChannels}}</h1> <h3>Channels</h3></div>
-          <div class="element-color" data-color="3-4"><h1>{{dataSummary.totalDimensions}}</h1> <h3>Dimensions</h3></div>
-          <div class="element-color" data-color="4-5"><h1>{{dataSummary.totalDimensionInstances}}</h1> <h3>Dimension Instances</h3></div>
-          <div class="element-color" data-color="5-6"><h1>{{dataSummary.totalTimeSeries}}</h1> <h3>Time Series</h3></div>
-          <div class="element-color" data-color="6-7"><h1>{{dataSummary.totalDataPoints}}</h1> <h3>Total Data Points</h3></div>
-        </div>
-        <div class="col-lg-12 container-to-recolor color-white"ng-if="googleAnalytics">
-          <div>
-            <h1>{{googleAnalytics.newUsers}}</h1>
-            <h3>Number of new users who logged in this year</h3>
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 408.76 940.63"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:6px;}</style></defs><title>maze_graphic</title><path id="wanderer" class="cls-1" d="M206.05-37.23s-7,60,0,80,8,75-38,106,5,92,5,92,114,25,128-43c3-36-25-99,40-118s100,59,112,85,6,122-97,126-142,37-104,76,150,18,150,18,32-2,37,42-82,78-101,71-118,13-143-159c-64-100-135,5-135,5s-19,191,15,246,116,32,139,24,74-69,105-69,111,9,94,91c-29,55-51,71-51,71s-22,30,8,123c14,68-50,70-50,70s-78-3-103,0-134-17-117-120,41-89,41-89,117-15,139,9c6.27,6.84-9.19,75.24,11,79,43,8,77.9,65.39,45,94-46,40-114-1-116-25s14-53,14-53,15.5-47.5,56.5-15.5" transform="translate(-51.76 37.57)"/></svg>
+        <div class="span-12" id="todo-list">
+          <div ng-if="googleAnalytics">
+            <div class="frame col-lg-12"  id="frame1">
+              <h1>{{googleAnalytics.totalHoursSpent}} minutes</h1>
+              <h3>Total time spent in Beckon this year</h3>
+            </div>
+            <div class="frame col-lg-12" id="frame2">
+                <h3>Top Beckon Users</h3>
+                <h4 ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
+            </div>
+            <div class="frame col-lg-12" id="frame3">
+                <h1>{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
+                <h3>The most popular day of the week to use Beckon!</h3>
+            </div>
+            <div class="frame col-lg-12" id="frame4">
+              <h1>{{googleAnalytics.newUsers}}</h1>
+              <h3>Number of new users who logged in this year</h3>
+            </div>
           </div>
-          <div>
-            <h3>Top Beckon Users</h3>
-            <h4 ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
+          <div ng-if="dashboardSummary && scorecardSummary">
+            <div class="frame col-lg-12" id="frame5">
+              <div><h1>{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
+              <div><h1>{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
+            </div>
+            <div class="frame col-lg-12" id="frame6">
+              <div><h3>Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
+              <div><h3>Scorecard Samurai</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
+            </div>
           </div>
-          <div>
-            <h1>{{googleAnalytics.totalHoursSpent}} minutes</h1>
-            <h3>Total time spent in Beckon this year</h3>
+          <div class="frame col-lg-12" ng-if="dataSummary" id="frame7">
+              <h3>You had...</h3>
+              <div class="element-color" data-color="1-2"><h1 class="stat">{{dataSummary.totalChannelMetrics}}</h1> <h3>Channel Metrics</h3></div>
+              <div class="element-color" data-color="2-3"><h1>{{dataSummary.totalChannels}}</h1> <h3>Channels</h3></div>
+              <div class="element-color" data-color="3-4"><h1>{{dataSummary.totalDimensions}}</h1> <h3>Dimensions</h3></div>
+              <div class="element-color" data-color="4-5"><h1>{{dataSummary.totalDimensionInstances}}</h1> <h3>Dimension Instances</h3></div>
+              <div class="element-color" data-color="5-6"><h1>{{dataSummary.totalTimeSeries}}</h1> <h3>Time Series</h3></div>
+              <div class="element-color" data-color="6-7"><h1>{{dataSummary.totalDataPoints}}</h1> <h3>Total Data Points</h3></div>
           </div>
-          <div>
-            <h1>{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
-            <h3>The most popular day of the week to use Beckon!</h3>
+          <div class="frame col-lg-12" id="frame8">
+            What will next year hold?
           </div>
-
+            <button class="btn" ng-click="getData()">Get Data</button>
+            <button class="btn" ng-click="getDashboardsList()">Get Dashboard Summary</button>
+            <button class="btn" ng-click="getScorecardsList()">Get Scorecard Summary</button>
+            <button class="btn" ng-click="getGoogleAnalytics()">Get Google Analytics Summary</button>
         </div>
       </div>
-    </div>
-  </div>
-</body>
+    </body>
 </html>
