@@ -1,7 +1,7 @@
 (function(){
   var todoApp = angular.module('todoApp', [
 
-  ]).controller('mainController', function($scope, $http, $window){
+  ]).controller('mainController', function($scope, $http, $window, $timeout){
     var dateOneYearAgo = new Date('March 3 2016').getTime();
     var dateToday = new Date().getTime();
     function getTopOwners (entityList){
@@ -60,38 +60,43 @@
     $scope.getGoogleAnalytics = function () {
       $http.get('/googleAnalytics').then(function(response) {
         $scope.googleAnalytics = response.data;
+        $scope.googleAnalytics.totalMinutesSpent = $scope.googleAnalytics.totalHoursSpent;
+        $scope.googleAnalytics.totalHoursSpent =  Math.floor($scope.googleAnalytics.totalHoursSpent/60);
+        $scope.googleAnalytics.totalDaysSpent = Math.floor($scope.googleAnalytics.totalHoursSpent/24);
       });
     };
 
 
 
     var zeroPanel = angular.element.find("#frame1")[0].offsetTop;
-
-    angular.element($window).bind("scroll", function(e) {
-      if ($window.pageYOffset > zeroPanel && $window.pageYOffset < zeroPanel + 500) {
-        console.log("in first frame");
-      } else if ($window.pageYOffset > zeroPanel + 500 && $window.pageYOffset < zeroPanel + 500*2) {
-        console.log("in second frame");
-        //fill hours at beckon chart
-        angular.element('progress-fill').each(function(){
-          var minuteValue = this.html();
-          var value = minuteValue.split(0, minuteValue.length- 8);
-          this.parent().css('width', value);
-        });
-      } else if ($window.pageYOffset > zeroPanel + 500*2 && $window.pageYOffset < zeroPanel + 500*3) {
-        console.log("in third frame");
-      } else if ($window.pageYOffset > zeroPanel + 500*3 && $window.pageYOffset < zeroPanel + 500*4) {
-        console.log("in fourth frame");
-      } else if ($window.pageYOffset > zeroPanel + 500*4 && $window.pageYOffset < zeroPanel + 500*5) {
-        console.log("in fifth frame");
-      } else if ($window.pageYOffset > zeroPanel + 500*5 && $window.pageYOffset < zeroPanel + 500*6) {
-        console.log("in sixth frame");
-      } else if ($window.pageYOffset > zeroPanel + 500*6 && $window.pageYOffset < zeroPanel + 500*7) {
-        console.log("in seventh frame");
-      } else if ($window.pageYOffset > zeroPanel + 500*7 && $window.pageYOffset < zeroPanel + 500*8) {
-        console.log("in eigth frame");
-      }
-    });
+    
+    $timeout(function(){
+      angular.element($window).bind("scroll", function(e) {
+        if ($window.pageYOffset > zeroPanel && $window.pageYOffset < zeroPanel + 500) {
+          console.log("in first frame");
+        } else if ($window.pageYOffset > zeroPanel + 500 && $window.pageYOffset < zeroPanel + 500*2) {
+          console.log("in second frame");
+          //fill hours at beckon chart
+          angular.element('progress-fill').each(function(){
+            var minuteValue = this.html();
+            var value = minuteValue.split(0, minuteValue.length- 8);
+            this.parent().css('width', value);
+          });
+        } else if ($window.pageYOffset > zeroPanel + 500*2 && $window.pageYOffset < zeroPanel + 500*3) {
+          console.log("in third frame");
+        } else if ($window.pageYOffset > zeroPanel + 500*3 && $window.pageYOffset < zeroPanel + 500*4) {
+          console.log("in fourth frame");
+        } else if ($window.pageYOffset > zeroPanel + 500*4 && $window.pageYOffset < zeroPanel + 500*5) {
+          console.log("in fifth frame");
+        } else if ($window.pageYOffset > zeroPanel + 500*5 && $window.pageYOffset < zeroPanel + 500*6) {
+          console.log("in sixth frame");
+        } else if ($window.pageYOffset > zeroPanel + 500*6 && $window.pageYOffset < zeroPanel + 500*7) {
+          console.log("in seventh frame");
+        } else if ($window.pageYOffset > zeroPanel + 500*7 && $window.pageYOffset < zeroPanel + 500*8) {
+          console.log("in eigth frame");
+        }
+      });
+    }, 500);
 
     // var previouslyAppliedColor = "color-white";
     // var path = angular.element.find('#wanderer')[0];
@@ -114,6 +119,11 @@
     //     path.style.strokeDasharray = pathLength + ' ' + pathLength;
     //   }
     // });
+
+    $scope.getDashboardsList();
+    $scope.getGoogleAnalytics();
+    $scope.getScorecardsList();
+    $scope.getData();
   });
 
 
