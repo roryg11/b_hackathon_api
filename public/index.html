@@ -18,6 +18,7 @@
       <div class="container">
         <div class="jumbotron text-center">
           <h1>Your Year In Review with Beckon</h1>
+            <button class="btn" ng-if="!googleAnalytics" ng-click="getGoogleAnalytics()">Get Summary</button>
         </div>
         <div class="span-12" id="todo-list">
             <div class="frame col-lg-12"  id="frame1">
@@ -31,7 +32,6 @@
             </div>
             <div class="frame col-lg-12" id="frame2">
                 <div ng-if="googleAnalytics">
-                    <h4 class="reveal-container-right-yellow"ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
                     <div class="bar-container horizontal flat">
                         <h3>Top Beckon Users</h3>
                         <div class="progress-bar horizontal">
@@ -102,22 +102,16 @@
             </div>
           <div class="frame col-lg-12" id="frame7">
               <div ng-if="dataSummary">
-                  <h3>You had...</h3>
+                  <h3>You added...</h3>
                   <div data-color="1-2"><h3 class="stat">{{dataSummary.totalChannelMetrics}}</h3> <h5>Channel Metrics</h5></div>
                   <div data-color="2-3"><h3>{{dataSummary.totalChannels}}</h3> <h5>Channels</h5></div>
                   <div data-color="3-4"><h3>{{dataSummary.totalDimensions}}</h3> <h5>Dimensions</h5></div>
+                  <div data-color="4-5"><h3>{{dataSummary.totalDimensionInstances}}</h3> <h5>Dimension Instances</h5></div>
               </div>
           </div>
           <div class="frame col-lg-12" id="frame8">
-              <div data-color="4-5"><h3>{{dataSummary.totalDimensionInstances}}</h3> <h5>Dimension Instances</h5></div>
-              <div data-color="5-6"><h3>{{dataSummary.totalTimeSeries}}</h3> <h5>Time Series</h5></div>
-              <div data-color="6-7"><h3>{{dataSummary.totalDataPoints}}</h3> <h5>Total Data Points</h5></div>
-              <div><h3>What will next year hold?</h3></div>
+              <div><h1>What will next year hold?</h1></div>
           </div>
-            <button class="btn" ng-click="getData()">Get Data</button>
-            <button class="btn" ng-click="getDashboardsList()">Get Dashboard Summary</button>
-            <button class="btn" ng-click="getScorecardsList()">Get Scorecard Summary</button>
-            <button class="btn" ng-click="getGoogleAnalytics()">Get Google Analytics Summary</button>
         </div>
       </div>
     </body>
