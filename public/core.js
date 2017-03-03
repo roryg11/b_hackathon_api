@@ -1,7 +1,7 @@
 (function(){
   var todoApp = angular.module('todoApp', [
 
-  ]).controller('mainController', function($scope, $http, $window){
+  ]).controller('mainController', function($scope, $http, $window, $timeout){
     var dateOneYearAgo = new Date('March 3 2016').getTime();
     var dateToday = new Date().getTime();
     function getTopOwners (entityList){
@@ -60,6 +60,9 @@
     $scope.getGoogleAnalytics = function () {
       $http.get('/googleAnalytics').then(function(response) {
         $scope.googleAnalytics = response.data;
+        $scope.googleAnalytics.totalMinutesSpent = $scope.googleAnalytics.totalHoursSpent;
+        $scope.googleAnalytics.totalHoursSpent =  Math.floor($scope.googleAnalytics.totalHoursSpent/60);
+        $scope.googleAnalytics.totalDaysSpent = Math.floor($scope.googleAnalytics.totalHoursSpent/24);
       });
     };
 
@@ -141,6 +144,11 @@
     //     path.style.strokeDasharray = pathLength + ' ' + pathLength;
     //   }
     // });
+
+    $scope.getDashboardsList();
+    $scope.getGoogleAnalytics();
+    $scope.getScorecardsList();
+    $scope.getData();
   });
 
 

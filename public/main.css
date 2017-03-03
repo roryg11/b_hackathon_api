@@ -5,22 +5,16 @@ html {
 body {
   font-family: 'Roboto', sans-serif;
   padding-top: 25px;
-  background:url("/images/watercolor-texture.jpg");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: rgba(240,240,240,1);
+  background: -moz-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(240,240,240,1)), color-stop(0%, rgba(219,219,219,1)), color-stop(53%, rgba(254,254,254,1)), color-stop(100%, rgba(240,240,240,1)));
+  background: -webkit-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: -o-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: -ms-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  background: linear-gradient(to right, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#f0f0f0', GradientType=1 );
 }
 #todo-list {margin-bottom: 30px}
-
-@keyframes beckonFade {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
 
 p h1 h2 h3 h4 h5 h6 div span {
   font-family: 'Lato', sans-serif;
@@ -28,7 +22,7 @@ p h1 h2 h3 h4 h5 h6 div span {
 
 h1 {
   font-family: 'Lato', sans-serif;
-  font-size: 20rem;
+  font-size: 6rem;
 }
 
 h2 {
@@ -47,25 +41,219 @@ h4 h5 h6 {
 }
 
 p {
-  font-size: .75rem;
+  font-size: 1rem;
 }
 
-/*.cls-1 {*/
-  /*stroke-dasharray: 8000;*/
-  /*stroke-dashoffset: 8000;*/
-  /*animation: dash 10s linear forwards;*/
-/*}*/
+.wanderer {
+  stroke-dasharray: 8000;
+  stroke-dashoffset: 8000;
+  animation: dash 10s linear forwards;
+  color: red;
+  mix-blend-mode:multiply;
+}
 
-/*@keyframes dash {*/
-  /*to {*/
-    /*stroke-dashoffset: 0;*/
-  /*}*/
-/*}*/
+.cls-1 {
+  fill:none;stroke: red;
+  stroke-miterlimit:10;
+  stroke-width:6px;
+  mix-blend-mode: multiply;
+}
+
+.animation-background {
+  background-blend-mode: multiply;
+  width: 100%;
+  background-image: url("/images/maze_graphic.png");
+  background-size: cover;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    font-size: .2rem;
+  }
+
+  100% {
+    opacity: 1;
+    font-size: 12rem;
+  }
+}
+
+div.stat {
+  font-size: 12rem;
+  animation: fadeIn .5s linear 1;
+  animation-play-state: paused;
+}
+
+div>.stat:hover {
+  animation-play-state: running;
+}
+
+.slide-from-right {
+  transform: translateX(100px);
+}
+
+.reveal-container-right-green {
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  font-size: 5rem;
+  text-align: left;
+  animation-name:expand-right-green;
+  animation-duration:1s;
+  animation-timing-function: ease;
+  animation-delay:0s;
+  animation-direction: normal;
+  animation-play-state: paused;
+}
+
+.reveal-container-right-yellow {
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  font-size: 3rem;
+  text-align: left;
+  animation-name:expand-right-yellow;
+  animation-duration:1s;
+  animation-timing-function: ease;
+  animation-delay:0s;
+  animation-direction: normal;
+  animation-play-state: paused;
+}
+
+.reveal-container-right-yellow:hover {
+  animation-play-state:running;
+}
+
+.reverse-animation {
+  text-align:right;
+  animation-direction: reverse;
+}
+
+@keyframes expand-right-green {
+  0%{
+    color: transparent;
+    width: 0%;
+    background-color: green;
+  }
+  97%{
+    color: transparent;
+    width: 98%;
+    background-color: green;
+  }
+  98%{
+    color: green;
+    width: 98%;
+    background-color: transparent;
+  }
+  100%{
+    color: black;
+    width: 100%;
+    background-color: transparent;
+  }
+}
+
+@keyframes expand-right-yellow {
+  0%{
+    color: transparent;
+    width: 0%;
+    background-color: yellow;
+  }
+  97%{
+    color: transparent;
+    width: 98%;
+    background-color: yellow;
+  }
+  98%{
+    color: green;
+    width: 98%;
+    background-color: transparent;
+  }
+  100%{
+    color: black;
+    width: 100%;
+    background-color: transparent;
+  }
+}
+
+@keyframes expand-right-yellow {
+  0%{
+    color: transparent;
+    width: 0%;
+    background-color: yellow;
+  }
+  98%{
+    color: transparent;
+    width: 98%;
+    background-color: yellow;
+  }
+  100%{
+    color: black;
+    width: 100%;
+    background-color: transparent;
+  }
+}
+
+.reveal-container-right-green:hover {
+  animation-play-state:running;
+}
+
+.flex--align-justify--center{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+div.svg-line:hover svg line.top {
+  -webkit-transform: translateX(-400px);
+  transform: translateX(-400px);
+}
+
+div.svg-line:hover svg line.bottom {
+  -webkit-transform: translateX(400px);
+  transform: translateX(400px);
+}
+
+div.svg-line:hover svg line.left {
+  -webkit-transform: translateY(400px);
+  transform: translateY(400px);
+}
+
+div.svg-line:hover svg line.right {
+  -webkit-transform: translateY(-400px);
+  transform: translateY(-400px);
+}
+
 
 .frame {
+  opacity: 1;
   height: 500px;
-  background: inherit;
+  display:flex;
 }
+
+/*.frame:hover {*/
+  /*opacity: 1;*/
+  /*transition: opacity .5s ease-in-out;*/
+/*}*/
 
 .bar-container {
   width: 700px;
