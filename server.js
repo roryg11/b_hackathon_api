@@ -18,19 +18,20 @@ app.use(methodOverride());
 // routes =================================
 
   app.get("/api/getSummary", function(req, res){
-      var j = request.jar();
-      var cookieString = "XSRF-TOKEN=0b77b3af935b80ba5ec0dbf11b82938078ddc76d;JSESSIONID=6qwvcsffhlqd9s908hpbsn0m;";
-      var url= 'http://localhost:8080/rest/a/enhanced_account/datasummary/basic';
-      j.setCookie(cookieString, url);
-
-        request({url: url, jar: j}, function (error, response, body) {
-            if(error){
-              console.log(error);
-            }
-            if (!error && response.statusCode == 200) {
-                console.log(body);
-             }
-        });
+      var options = {
+          url: "",
+          method: "GET",
+          headers: {
+              Cookie: "",
+              "X-XSRF-TOKEN": ""
+          }
+      };
+    request(options, function(error, response, body){
+        if(error){
+        console.log(error);
+        }
+        res.send(body);
+    });
   });
 
 // google analytics
@@ -105,7 +106,7 @@ app.get("/oauthcallback", function (req, res) {
 });
 
   // application -------------------------------------
-  app.get("*", function(req,res){
+  app.get("/home", function(req,res){
     res.sendFile(__dirname + '/public/index.html');
   });
 
