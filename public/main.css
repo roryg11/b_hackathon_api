@@ -86,7 +86,7 @@ p {
 .title-stat {
   font-size: 6rem;
   width: 400px;
-  text-align: right
+  text-align: right;
   border-right: 3px solid gray;
 }
 
@@ -261,7 +261,7 @@ div.svg-line:hover svg line.right {
 
 .frame {
   opacity: 1;
-  height: 500px;
+  height: 1000px;
   display:flex;
 }
 
@@ -277,6 +277,7 @@ div.svg-line:hover svg line.right {
   padding: 20px;
   overflow: hidden;
   float: left;
+  max-height: 500px;
 }
 
 .horizontal .progress-bar {
