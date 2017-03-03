@@ -40,10 +40,16 @@
     };
 
     $scope.getScorecardsList = function(){
-      $http.get('/api/scorecards').then(function(data){
+      $http.get('/api/scorecards').then(function(response){
         $scope.scorecardSummary = response.data;
       }, function(data){
         console.log('Error: ' + data);
+      });
+    };
+
+    $scope.getGoogleAnalytics = function () {
+      $http.get('/googleAnalytics').then(function(response) {
+        $scope.googleAnalytics = response.data;
       });
     };
 

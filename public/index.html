@@ -17,13 +17,14 @@
 <!--<div class="circle-animation"></div>-->
   <div class="container">
     <div class="jumbotron text-center">
-      <h1>Your Data In Review</h1>
+      <h1>Your Year In Review with Beckon</h1>
     </div>
     <div class="" id="todo-list">
       <div class="span-12">
         <button class="btn" ng-click="getData()">Get Data</button>
         <button class="btn" ng-click="getDashboardsList()">Get Dashboard Summary</button>
         <button class="btn" ng-click="getScorecardsList()">Get Scorecard Summary</button>
+        <button class="btn" ng-click="getGoogleAnalytics()">Get Google Analytics Summary</button>
         <div ng-if="dashboardSummary">
           <h3>Your dashboards...</h3>
           <div><h1>{{numberOfDashboards}}</h1><h3> Dashboards Tracking Your Marketing Data</h3></div>
@@ -37,6 +38,25 @@
           <div class="element-color" data-color="4-5"><h1>{{dataSummary.totalDimensionInstances}}</h1> <h3>Dimension Instances</h3></div>
           <div class="element-color" data-color="5-6"><h1>{{dataSummary.totalTimeSeries}}</h1> <h3>Time Series</h3></div>
           <div class="element-color" data-color="6-7"><h1>{{dataSummary.totalDataPoints}}</h1> <h3>Total Data Points</h3></div>
+        </div>
+        <div class="col-lg-12 container-to-recolor color-white"ng-if="googleAnalytics">
+          <div>
+            <h1>{{googleAnalytics.newUsers}}</h1>
+            <h3>Number of new users who logged in this year</h3>
+          </div>
+          <div>
+            <h3>Top Beckon Users</h3>
+            <h4 ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
+          </div>
+          <div>
+            <h1>{{googleAnalytics.totalHoursSpent}} minutes</h1>
+            <h3>Total time spent in Beckon this year</h3>
+          </div>
+          <div>
+            <h1>{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
+            <h3>The most popular day of the week to use Beckon!</h3>
+          </div>
+
         </div>
       </div>
     </div>
