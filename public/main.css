@@ -62,6 +62,11 @@ p {
   /*}*/
 /*}*/
 
+.frame {
+  min-height: 500px;
+  background: inherit;
+}
+
 .element-color {
   min-height: 60vh;
   display: flex;
