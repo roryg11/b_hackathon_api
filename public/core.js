@@ -58,23 +58,26 @@
     };
 
     var previouslyAppliedColor = "color-white";
+    var path = angular.element.find('#wanderer')[0];
+    var pathLength = path.getTotalLength();
+    path.style.strokeDasharray = pathLength + ' ' + pathLength;
+    path.style.strokeDashoffset = pathLength;
 
-    // angular.element($window).bind("scroll", function(e) {
-    //   var scroll = $window.pageYOffset + ($window.innerHeight/3);
-    //   var elementColors = angular.element.find('.element-color');
-    //   function classToRemove (){
-    //
-    //   }
-    //   for(var i=0; i < elementColors.length; i++){
-    //     if(elementColors[i].offsetTop <=scroll && elementColors[i].offsetTop + elementColors[i].offsetHeight > scroll){
-    //       angular.element.find('.container-to-recolor')[0].classList.remove(previouslyAppliedColor);
-    //       var color = "color-" + elementColors[i].getAttribute('data-color');
-    //       angular.element.find('.container-to-recolor')[0].classList.add(color);
-    //       previouslyAppliedColor = color;
-    //     }
-    //   }
-    //
-    // });
+    angular.element($window).bind("scroll", function(e) {
+      console.log("OFFSET");
+      console.log($window.pageYOffset);
+      var scroll = $window.pageYOffset + ($window.innerHeight/3);
+      var scrollPercentage = ($window.pageYOffset) / ($window.innerHeight - $window.pageYOffset);
+      console.log("SCROLL PERCENTAGE");
+      console.log(scrollPercentage ); 
+      var drawLength = pathLength * scrollPercentage;
+      path.style.strokeDashoffset = pathLength - drawLength;
+      if (scrollPercentage >= 0.99) {
+        path.style.strokeDasharray = "none";
+      } else {
+        path.style.strokeDasharray = pathLength + ' ' + pathLength;
+      }
+    });
   });
 
 
