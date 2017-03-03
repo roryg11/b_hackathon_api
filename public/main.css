@@ -116,7 +116,7 @@ div>.stat:hover {
   width: 100%;
   padding: 10px;
   margin: 10px;
-  font-size: 3rem;
+  font-size: 1.5rem;
   text-align: left;
   animation-name:expand-right-yellow;
   animation-duration:1s;
