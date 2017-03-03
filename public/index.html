@@ -18,6 +18,7 @@
       <div class="container">
         <div class="jumbotron text-center">
           <h1>Your Year In Review with Beckon</h1>
+            <button class="btn" ng-if="!googleAnalytics" ng-click="getGoogleAnalytics()">Get Summary</button>
         </div>
         <div class="span-12" id="todo-list">
             <div class="frame col-lg-12"  id="frame1">
@@ -30,57 +31,50 @@
                         <h1 class="reveal-container-right-green">{{googleAnalytics.totalHoursSpent}} HOURS</h1>
                         <h1 class="reveal-container-right-green">{{googleAnalytics.totalDaysSpent}} DAYS</h1>
                     </div>
-
                 </div>
             </div>
             <div class="frame col-lg-12" id="frame2">
                 <div ng-if="googleAnalytics" style="display:flex;">
-                    <div>
-                        <h4 ng-repeat="user in googleAnalytics.mostAvidUsers track by $index" ng-if="$index < 4"> {{$index + 1}}. {{user[0]}}</h4>
-                    </div>
-                    <div>
-                        <div class="bar-container horizontal flat">
-                            <h3>Top Beckon Users</h3>
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[0][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[1][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[2][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[3][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[4][1]}} minutes</span>
-                                    </div>
+                    <div class="bar-container horizontal flat">
+                        <h3>Top Beckon Users</h3>
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[0][1]}} minutes</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[1][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[2][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[3][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-bar horizontal">
+                            <div class="progress-track">
+                                <div class="progress-fill">
+                                    <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[4][1]}} minutes</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,11 +113,8 @@
           </div>
           <div class="frame col-lg-12" id="frame8">
               <div><h3>What will next year hold?</h3></div>
+              <div><h1>What will next year hold?</h1></div>
           </div>
-            <button class="btn" ng-click="getData()">Get Data</button>
-            <button class="btn" ng-click="getDashboardsList()">Get Dashboard Summary</button>
-            <button class="btn" ng-click="getScorecardsList()">Get Scorecard Summary</button>
-            <button class="btn" ng-click="getGoogleAnalytics()">Get Google Analytics Summary</button>
         </div>
     </div>
     </body>
