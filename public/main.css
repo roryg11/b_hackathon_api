@@ -5,13 +5,13 @@ html {
 body {
   font-family: 'Roboto', sans-serif;
   padding-top: 25px;
-  background: rgba(240,240,240,1);
-  background: -moz-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
-  background: -webkit-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
-  background: -o-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
-  background: -ms-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
-  background: linear-gradient(to right, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#f0f0f0', GradientType=1 );
+  background: rgba(200,200,200,1);
+  /*background: -moz-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);*/
+  /*background: -webkit-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);*/
+  /*background: -o-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);*/
+  /*background: -ms-linear-gradient(left, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);*/
+  /*background: linear-gradient(to right, rgba(240,240,240,1) 0%, rgba(219,219,219,1) 0%, rgba(254,254,254,1) 53%, rgba(240,240,240,1) 100%);*/
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#f0f0f0', GradientType=1 );*/
 }
 #todo-list {margin-bottom: 30px}
 
@@ -99,6 +99,7 @@ p {
 
 .huge-stat{
   font-size: 20rem;
+  text-align: center;
 }
 
 .medium-stat{
@@ -154,15 +155,15 @@ p {
   0%{
     color: transparent;
     width: 0%;
-    background-color: green;
+    background-color: darkturquoise;
   }
   97%{
     color: transparent;
     width: 98%;
-    background-color: green;
+    background-color: darkturquoise;
   }
   98%{
-    color: green;
+    color: teal;
     width: 98%;
     background-color: transparent;
   }
@@ -260,15 +261,20 @@ div.svg-line:hover svg line.right {
 
 
 .frame {
-  opacity: 1;
+  opacity: .5;
   height: 1000px;
   display:flex;
+  background-color: darkgray;
+  display: flex;
+  align-content: center;
 }
 
-/*.frame:hover {*/
-  /*opacity: 1;*/
-  /*transition: opacity .5s ease-in-out;*/
-/*}*/
+.frame:hover {
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+}
+
+
 
 .bar-container {
   width: 700px;

@@ -94,14 +94,13 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
             <div class="frame col-lg-12" id="frame3">
                 <div ng-if="googleAnalytics">
-                    <h3>The most popular day of the week to use Beckon!</h3>
-                    <h1 class="reveal-container-right-green huge-stat">{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
+                    <h3 >The most popular day of the week to use Beckon!</h3>
+                    <h1 class="reveal-container-right-green" style="font-size:20rem;">{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
                 </div>
             </div>
             <div class="frame col-lg-12" id="frame4">
@@ -110,10 +109,10 @@
                     <h3 class="reveal-container-right-green">Number of new users who logged in this year</h3>
                 </div>
             </div>
-            <div class="frame col-lg-12" id="frame5">
-                <div ng-if="dashboardSummary && scorecardSummary">
-                    <div><h1 class="reveal-container-right-green">{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
-                    <div><h1 class="reveal-container-right-green">{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
+            <div class="frame col-lg-12 flex flex--align-justify--center" id="frame5">
+                <div ng-if="dashboardSummary && scorecardSummary" class="flex flex--align-justify--center">
+                    <div><h1 class="reveal-container-right-green" style="font-size:20rem;">{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
+                    <div><h1 class="reveal-container-right-green" style="font-size:20rem;">{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
                 </div>
             </div>
             <div class="frame col-lg-12" id="frame6">
