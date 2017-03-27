@@ -86,12 +86,14 @@
 
     angular.element($window).bind("scroll", function(e) {
 
-       if ($window.pageYOffset < zeroPanel - 500) {
+      var frame = 1000;
+
+       if ($window.pageYOffset < zeroPanel - frame) {
          secondFrameTrigger = false;
          console.log("below first frame");
-       } else if ($window.pageYOffset > zeroPanel - 500 && $window.pageYOffset < zeroPanel) {
+       } else if ($window.pageYOffset > zeroPanel - frame && $window.pageYOffset < zeroPanel) {
          console.log("in first frame");
-       } else if ($window.pageYOffset > zeroPanel && $window.pageYOffset < zeroPanel + 500 ) {
+       } else if ($window.pageYOffset > zeroPanel && $window.pageYOffset < zeroPanel + frame ) {
          console.log("in second frame");
          //fill hours at beckon chart
          if (!secondFrameTrigger) {
@@ -107,17 +109,18 @@
            }
          }
 
-       } else if ($window.pageYOffset > zeroPanel + 500 && $window.pageYOffset < zeroPanel + 500*2) {
+       } else if ($window.pageYOffset > zeroPanel + frame && $window.pageYOffset < zeroPanel + frame*2) {
          console.log("in third frame");
-       } else if ($window.pageYOffset > zeroPanel + 500*2 && $window.pageYOffset < zeroPanel + 500*3) {
+       } else if ($window.pageYOffset > zeroPanel + frame*2 && $window.pageYOffset < zeroPanel + frame*3) {
          console.log("in fourth frame");
-       } else if ($window.pageYOffset > zeroPanel + 500*3 && $window.pageYOffset < zeroPanel + 500*4) {
+         secondFrameTrigger = false;
+       } else if ($window.pageYOffset > zeroPanel + frame*3 && $window.pageYOffset < zeroPanel + frame*4) {
          console.log("in fifth frame");
-       } else if ($window.pageYOffset > zeroPanel + 500*4 && $window.pageYOffset < zeroPanel + 500*5) {
+       } else if ($window.pageYOffset > zeroPanel + frame*4 && $window.pageYOffset < zeroPanel + frame*5) {
          console.log("in sixth frame");
-       } else if ($window.pageYOffset > zeroPanel + 500*5 && $window.pageYOffset < zeroPanel + 500*6) {
+       } else if ($window.pageYOffset > zeroPanel + frame*5 && $window.pageYOffset < zeroPanel + frame*6) {
          console.log("in seventh frame");
-       } else if ($window.pageYOffset > zeroPanel + 500*6 && $window.pageYOffset < zeroPanel + 500*7) {
+       } else if ($window.pageYOffset > zeroPanel + frame*6 && $window.pageYOffset < zeroPanel + frame*7) {
          console.log("in eigth frame");
        }
 
