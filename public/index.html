@@ -24,7 +24,7 @@
             <div class="frame col-lg-12"  id="frame1">
                 <div ng-if="googleAnalytics" class="flex">
                     <div>
-                        <h4 class="title-stat">Total Time Spent in Beckon This Year</h4>
+                        <h4 class="title-stat" style="padding-right: 10px;">Total Time Spent in Beckon This Year</h4>
                     </div>
                     <div>
                         <h1 class="reveal-container-right-green">{{googleAnalytics.totalMinutesSpent}} MINUTES</h1>
@@ -109,29 +109,32 @@
                     <h1 class="reveal-container-right-green" style="font-size: 20rem; text-align: center;">{{googleAnalytics.newUsers}}</h1>
                 </div>
             </div>
-            <div class="frame col-lg-12 flex flex--align-justify--center" id="frame5">
+            <div class="frame col-lg-12" id="frame5">
                 <div ng-if="dashboardSummary && scorecardSummary" class="flex flex--align-justify--center">
                     <div><h1 class="reveal-container-right-green" style="font-size:20rem;">{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
                     <div><h1 class="reveal-container-right-green" style="font-size:20rem;">{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
                 </div>
             </div>
             <div class="frame col-lg-12" id="frame6">
-                <div ng-if="dashboardSummary && scorecardSummary">
-                    <div><h3 class="reveal-container-right-yellow" >Dashboard Dojos</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
-                    <div><h3 class="reveal-container-right-yellow" >Scorecard Samurai</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
+                <div ng-if="dashboardSummary && scorecardSummary" class="flex flex--align-justify--center">
+                    <div><h3 class="reveal-container-right-yellow" style="font-size: 5rem;">Top Dashboard Users</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
+                    <div><h3 class="reveal-container-right-yellow" style="font-size: 5rem;" >Top Scorecard Users</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
                 </div>
             </div>
           <div class="frame col-lg-12" id="frame7">
-              <div ng-if="dataSummary">
+              <div ng-if="dataSummary" class="flex">
                   <h3>You had...</h3>
-                  <div data-color="1-2"><h3 class="reveal-container-right-green" >{{dataSummary.totalChannelMetrics}}</h3> <h5>Channel Metrics</h5></div>
-                  <div data-color="2-3"><h3 class="reveal-container-right-green">{{dataSummary.totalChannels}}</h3> <h5>Channels</h5></div>
-                  <div data-color="3-4"><h3 class="reveal-container-right-green">{{dataSummary.totalDimensions}}</h3> <h5>Dimensions</h5></div>
-                  <div data-color="4-5"><h3 class="reveal-container-right-green">{{dataSummary.totalDimensionInstances}}</h3> <h5>Dimension Instances</h5></div>
+                  <div class="flex" style="justify-content: center; align-items: center;">
+                      <div data-color="1-2"><h1 class="reveal-container-right-green" >{{dataSummary.totalChannelMetrics}}</h1> <h5>Channel Metrics</h5></div>
+                      <div data-color="2-3"><h1 class="reveal-container-right-green">{{dataSummary.totalChannels}}</h1> <h5>Channels</h5></div>
+                      <div data-color="3-4"><h1 class="reveal-container-right-green">{{dataSummary.totalDimensions}}</h1> <h5>Dimensions</h5></div>
+                      <div data-color="4-5"><h1 class="reveal-container-right-green">{{dataSummary.totalDimensionInstances}}</h1> <h5>Dimension Instances</h5></div>
+                  </div>
               </div>
           </div>
-          <div class="frame col-lg-12" id="frame8">
+          <div class="frame col-lg-12" id="frame8" style="flex-direction: column;">
               <div><h1>What will next year hold?</h1></div>
+              <div><h1>Click <a>here</a> to leverage your data even more.</h1></div>
           </div>
         </div>
     </div>

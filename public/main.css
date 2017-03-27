@@ -17,6 +17,7 @@ body {
 
 p h1 h2 h3 h4 h5 h6 div span {
   font-family: 'Lato', sans-serif;
+  color: black;
 }
 
 h1 {
@@ -155,12 +156,12 @@ p {
   0%{
     color: transparent;
     width: 0%;
-    background-color: darkturquoise;
+    background-color: #AEEEEE;
   }
   97%{
     color: transparent;
     width: 98%;
-    background-color: darkturquoise;
+    background-color: #AEEEEE;
   }
   98%{
     color: teal;
@@ -178,12 +179,12 @@ p {
   0%{
     color: transparent;
     width: 0%;
-    background-color: yellow;
+    background-color: #FFFF99;
   }
   97%{
     color: transparent;
     width: 98%;
-    background-color: yellow;
+    background-color: #FFFF99;
   }
   98%{
     color: green;
@@ -201,12 +202,12 @@ p {
   0%{
     color: transparent;
     width: 0%;
-    background-color: yellow;
+    background-color: #FFFF99;
   }
   98%{
     color: transparent;
     width: 98%;
-    background-color: yellow;
+    background-color: #FFFF99;
   }
   100%{
     color: black;
@@ -263,9 +264,8 @@ div.svg-line:hover svg line.right {
 .frame {
   height: 1000px;
   opacity: .7;
-  height: 500px;
   display:flex;
-  background-color: rgb(80, 80, 80);
+  background-color: rgb(180, 180, 180);
   display: flex;
   align-content: center;
 }
