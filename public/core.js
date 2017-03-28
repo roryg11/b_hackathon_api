@@ -1,7 +1,150 @@
 (function(){
   var todoApp = angular.module('todoApp', [
-
+    "kendo.directives"
   ]).controller('mainController', function($scope, $http, $window, $timeout){
+    $scope.selected = [];
+
+    $scope.toggleCheckbox= function (dataItem, event){
+      if(event.currentTarget.checked){
+        $scope.selected.push(dataItem);
+      } else {
+        var existingIndex = $scope.selected.indexOf(dataItem);
+        $scope.selected.splice(existingIndex, 1);
+      }
+    };
+
+    function setUpDashboardList (dashboardResponse){
+      var schema = {
+        model : {
+          id: "id",
+          fields: {
+            "id": {type: "number"},
+            "displayInfo": {
+              type: 'string',
+              from: 'displayInfo.name'
+            },
+            "owner": {
+              type: "string",
+              from: "userPermissions.owner.firstName"
+            },
+            "cost": {
+              type: "number",
+              from: "cost"
+            },
+            "inStock": {
+              type: "number",
+              from: "inStock"
+            },
+            "dateAdded": {
+              type: "date",
+              from: "dateAdded"
+            }
+          }
+        }
+      };
+
+      $scope.mainGridOptions = {
+        // dataSource: dashboardResponse,
+        dataSource: {
+          type: "json",
+          transport: {
+            read: "/api/dashboards"
+          },
+          schema: schema,
+          batch: true,
+          pageSize: 10
+          // serverPagination: true
+          // serverPaging: true
+          // group: {
+          //   field: "CategoryID", aggregates: [
+          //     { field: "cost", aggregate: "sum" },
+          //     { field: "inStock", aggregate: "sum" }
+          //   ]
+          // },
+          // aggregate: [
+          //   { field: "cost", aggregate: "sum" },
+          //   { field: "inStock", aggregate: "sum" }
+          // ]
+        },
+        editable: true,
+        sortable: true,
+        selectable:"multiple, row",
+        filterable: {
+          mode: "row"
+        },
+        navigatable: true,
+        pageable: true,
+        mobile: true,
+        // toolbar: ["create", "save", "cancel"],
+        dataBound: function(e){ //event handler for "dataBound" event
+          console.log("-> Data is bound to the Grid");
+          angular.element(".checkbox").bind("change", function (e) {
+            $(e.target).closest("tr").toggleClass("k-state-selected");
+          });
+        },
+        change: function(e, test){ //event handler for "change" event
+          var selectedDataItem = e.sender.dataItem(e.sender.select());
+          console.log("-> Selected Dashboard: " + selectedDataItem.displayInfo);
+          $('tr').find('[type=checkbox]').prop('checked', false);
+          $('tr.k-state-selected').find('[type=checkbox]').prop('checked', true);
+        },
+        columns: [{
+          title: "select",
+          width: '50px',
+          template: '<input class="checkbox" type="checkbox" ng-click="toggleCheckbox(dataItem, $event)"/>'
+        },{
+          field: "id",
+          title: "ID",
+          width: "100px"
+        },{
+          field: "displayInfo",
+          title: "Dashboard Name"
+        },{
+          field: "owner",
+          title: "Owner"
+          // template: "#= userPermissions.owner.firstName + ' ' + userPermissions.owner.lastName #"
+        },{
+          //   field: "cost",
+          //   title: "Cost",
+          //   footerTemplate: "{{ column.title }} : {{ aggregate.sum | currency }}",
+          //   groupFooterTemplate:"{{ dataItem.cost.sum | currency }}"
+          // },{
+          //   field: "inStock",
+          //   title: "In Stock",
+          //   aggregates: ["sum"],
+          //   footerTemplate: "{{ column.title }} : {{ aggregate.sum }}",
+          //   groupFooterTemplate: "{{ dataItem.inStock.sum }}"
+          // },{
+          field: "dateAdded",
+          title: "Date Added",
+          type: "date",
+          format: "{0:MM/dd/yyyy}"
+          // template: "#= kendo.toString(new Date(parseInt(dateAdded)), 'yyyy-MM-dd HH:mm:ss') #"
+        }]
+      };
+
+    }
+
+    // var transport = {
+    //     read:   "/Products",
+    //     update: {
+    //       url: "/Products/Update",
+    //       type: "POST"
+    //     },
+    //     destroy: {
+    //       url: "/Products/Destroy",
+    //       type: "POST"
+    //     },
+    //     create: {
+    //       url: "/Products/Create",
+    //       type: "POST"
+    //     },
+    //   // determines if changes will be send to the server individually or as batch
+    //   batch: true
+    //   //...
+    // };
+
+    ////// --- old stuff--- ///////
     var dateOneYearAgo = new Date('March 3 2016').getTime();
     var dateToday = new Date().getTime();
     function getTopOwners (entityList){
@@ -39,9 +182,12 @@
 
     $scope.getDashboardsList = function(){
       $http.get('/api/dashboards').then(function(response){
-        $scope.dashboardSummary = response.data.filter(createdThisYear);
-        $scope.numberOfDashboards = $scope.dashboardSummary.length;
-        $scope.masterOwners = getTopOwners($scope.dashboardSummary);
+        $scope.dashboards = response.data;
+        $scope.dashboardLength = $scope.dashboards.length;
+        setUpDashboardList($scope.dashboards);
+        // $scope.dashboardSummary = response.data.filter(createdThisYear);
+        // $scope.numberOfDashboards = $scope.dashboardSummary.length;
+        // $scope.masterOwners = getTopOwners($scope.dashboardSummary);
       }, function(data){
         console.log('Error: ' + data);
       });
@@ -49,9 +195,10 @@
 
     $scope.getScorecardsList = function(){
       $http.get('/api/scorecards').then(function(response){
-        $scope.scorecardSummary = response.data.filter(createdThisYear);
-        $scope.numberOfScorecards = $scope.scorecardSummary.length;
-        $scope.scorecardSamurai = getTopOwners($scope.scorecardSummary);
+        $scope.scorecards = response.data;
+        // $scope.scorecardSummary = response.data.filter(createdThisYear);
+        // $scope.numberOfScorecards = $scope.scorecardSummary.length;
+        // $scope.scorecardSamurai = getTopOwners($scope.scorecardSummary);
       }, function(data){
         console.log('Error: ' + data);
       });
@@ -66,90 +213,7 @@
       });
     };
 
-    function growBar(elem, totalWidth) {
-      var width = 1;
-      var id = setInterval(frame, 10);
-      function frame() {
-        if (width >= totalWidth) {
-          clearInterval(id);
-        } else {
-          width++;
-          elem.style.width = width + '%';
-        }
-      }
-    }
-
-    var secondFrameTrigger = false;
-
-
-    var zeroPanel = angular.element.find("#frame1")[0].offsetTop;
-
-    angular.element($window).bind("scroll", function(e) {
-
-      var frame = 1000;
-
-       if ($window.pageYOffset < zeroPanel - frame) {
-         secondFrameTrigger = false;
-         console.log("below first frame");
-       } else if ($window.pageYOffset > zeroPanel - frame && $window.pageYOffset < zeroPanel) {
-         console.log("in first frame");
-       } else if ($window.pageYOffset > zeroPanel && $window.pageYOffset < zeroPanel + frame ) {
-         console.log("in second frame");
-         //fill hours at beckon chart
-         if (!secondFrameTrigger) {
-           if (angular.element('.progress-fill span').length) {
-             var innerTextValue = angular.element('.progress-fill span')[0].innerText;
-             var greatestValue = innerTextValue.substr(0, innerTextValue.length - 8);
-             angular.element('.progress-fill span').each(function(){
-               var minuteValue = this.innerText;
-               var percentFill = ((minuteValue.substr(0, minuteValue.length - 8)/greatestValue) * 100);
-               growBar(this.parentElement, percentFill);
-             });
-             secondFrameTrigger = true;
-           }
-         }
-
-       } else if ($window.pageYOffset > zeroPanel + frame && $window.pageYOffset < zeroPanel + frame*2) {
-         console.log("in third frame");
-       } else if ($window.pageYOffset > zeroPanel + frame*2 && $window.pageYOffset < zeroPanel + frame*3) {
-         console.log("in fourth frame");
-         secondFrameTrigger = false;
-       } else if ($window.pageYOffset > zeroPanel + frame*3 && $window.pageYOffset < zeroPanel + frame*4) {
-         console.log("in fifth frame");
-       } else if ($window.pageYOffset > zeroPanel + frame*4 && $window.pageYOffset < zeroPanel + frame*5) {
-         console.log("in sixth frame");
-       } else if ($window.pageYOffset > zeroPanel + frame*5 && $window.pageYOffset < zeroPanel + frame*6) {
-         console.log("in seventh frame");
-       } else if ($window.pageYOffset > zeroPanel + frame*6 && $window.pageYOffset < zeroPanel + frame*7) {
-         console.log("in eigth frame");
-       }
-
-    });
-
-    // var previouslyAppliedColor = "color-white";
-    // var path = angular.element.find('#wanderer')[0];
-    // var pathLength = path.getTotalLength();
-    // path.style.strokeDasharray = pathLength + ' ' + pathLength;
-    // path.style.strokeDashoffset = pathLength;
-    //
-    // angular.element($window).bind("scroll", function(e) {
-    //   console.log("OFFSET");
-    //   console.log($window.pageYOffset);
-    //   var scroll = $window.pageYOffset + ($window.innerHeight/3);
-    //   var scrollPercentage = ($window.pageYOffset) / ($window.innerHeight - $window.pageYOffset);
-    //   console.log("SCROLL PERCENTAGE");
-    //   console.log(scrollPercentage );
-    //   var drawLength = pathLength * scrollPercentage;
-    //   path.style.strokeDashoffset = pathLength - drawLength;
-    //   if (scrollPercentage >= 0.99) {
-    //     path.style.strokeDasharray = "none";
-    //   } else {
-    //     path.style.strokeDasharray = pathLength + ' ' + pathLength;
-    //   }
-    // });
-
     $scope.getDashboardsList();
-    $scope.getGoogleAnalytics();
     $scope.getScorecardsList();
     $scope.getData();
   });

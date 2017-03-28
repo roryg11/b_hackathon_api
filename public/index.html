@@ -9,134 +9,25 @@
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script><!-- load angular -->
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
       <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <script src="kendo.all.min.js"></script>
+        <link rel="stylesheet" href="kendo.common-material.core.min.css">
+        <link rel="stylesheet" href="kendo.common-material.min.css">
+        <link rel="stylesheet" href="kendo.material.min.css">
+        <link rel="stylesheet" href="kendo.material.mobile.min.css">
       <link rel="stylesheet" href="main.css" type="text/css" />
       <script src="core.js"></script>
     </head>
     <body ng-app="todoApp" ng-controller="mainController" class="container-to-recolor color-white">
     <!--<div class="animation-thing"></div>-->
     <!--<div class="circle-animation"></div>-->
-      <div class="container">
-        <div class="jumbotron text-center">
-          <h1>Your Year In Review with Beckon</h1>
-            <button class="btn" ng-if="!googleAnalytics" ng-click="getGoogleAnalytics()">Get Summary</button>
-        </div>
-        <div class="span-12" id="todo-list">
-            <div class="frame col-lg-12"  id="frame1">
-                <div ng-if="googleAnalytics" class="flex">
-                    <div>
-                        <h4 class="title-stat" style="padding-right: 10px;">Total Time Spent in Beckon This Year</h4>
-                    </div>
-                    <div>
-                        <h1 class="reveal-container-right-green">{{googleAnalytics.totalMinutesSpent}} MINUTES</h1>
-                        <h1 class="reveal-container-right-green">{{googleAnalytics.totalHoursSpent}} HOURS</h1>
-                        <h1 class="reveal-container-right-green">{{googleAnalytics.totalDaysSpent}} DAYS</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="frame col-lg-12" id="frame2">
-                <div ng-if="googleAnalytics">
-                    <div class="bar-container horizontal flat">
-                        <h3>Top Beckon Users</h3>
-                        <div style="display: inline-block; width: 150px;">
-                            <div style="color: #333;" class="progress-bar horizontal">
-                                1. {{googleAnalytics.mostAvidUsers[0][0]}}
-                            </div>
-                            <div style="color: #333;" class="progress-bar horizontal">
-                                2. {{googleAnalytics.mostAvidUsers[1][0]}}
-                            </div>
-                            <div style="color: #333;" class="progress-bar horizontal">
-                                3. {{googleAnalytics.mostAvidUsers[2][0]}}
-                            </div>
-                            <div style="color: #333;" class="progress-bar horizontal">
-                                4. {{googleAnalytics.mostAvidUsers[3][0]}}
-                            </div>
-                            <div style="color: #333;" class="progress-bar horizontal">
-                                5. {{googleAnalytics.mostAvidUsers[4][0]}}
-                            </div>
-                        </div>
-                        <div style="display: inline-block;">
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[0][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[1][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[2][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[3][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="progress-bar horizontal">
-                                <div class="progress-track">
-                                    <div class="progress-fill">
-                                        <span class="horizontal-bar">{{googleAnalytics.mostAvidUsers[4][1]}} minutes</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="frame col-lg-12" id="frame3">
-                <div ng-if="googleAnalytics">
-                    <h3 >The most popular day of the week to use Beckon!</h3>
-                    <h1 class="reveal-container-right-green" style="font-size:20rem;">{{googleAnalytics.mostPopularDayOfWeek[0].day}}</h1>
-                </div>
-            </div>
-            <div class="frame col-lg-12" id="frame4">
-                <div ng-if="googleAnalytics">
-                    <h3 >Number of new users who logged in this year</h3>
-                    <h1 class="reveal-container-right-green" style="font-size: 20rem; text-align: center;">{{googleAnalytics.newUsers}}</h1>
-                </div>
-            </div>
-            <div class="frame col-lg-12" id="frame5">
-                <div ng-if="dashboardSummary && scorecardSummary" class="flex flex--align-justify--center">
-                    <div><h1 class="reveal-container-right-green" style="font-size:20rem;">{{numberOfDashboards}}</h1><h3> Dashboards</h3></div>
-                    <div><h1 class="reveal-container-right-green" style="font-size:20rem;">{{numberOfScorecards}}</h1> <h3>Scorecards</h3></div>
-                </div>
-            </div>
-            <div class="frame col-lg-12" id="frame6">
-                <div ng-if="dashboardSummary && scorecardSummary" class="flex flex--align-justify--center">
-                    <div><h3 class="reveal-container-right-yellow" style="font-size: 5rem;">Top Dashboard Users</h3><h4 ng-repeat="owner in masterOwners track by $index" ng-if="$index < 5"> {{$index + 1}}. {{owner[0]}}, {{owner[1]}} Dashboards</h4></div>
-                    <div><h3 class="reveal-container-right-yellow" style="font-size: 5rem;" >Top Scorecard Users</h3><h4 ng-repeat="owner in scorecardSamurai track by $index" ng-if="$index < 5">{{$index + 1}}. {{owner[0]}}, {{owner[1]}} Scorecards</h4></div>
-                </div>
-            </div>
-          <div class="frame col-lg-12" id="frame7">
-              <div ng-if="dataSummary" class="flex">
-                  <h3>You had...</h3>
-                  <div class="flex" style="justify-content: center; align-items: center;">
-                      <div data-color="1-2"><h1 class="reveal-container-right-green" >{{dataSummary.totalChannelMetrics}}</h1> <h5>Channel Metrics</h5></div>
-                      <div data-color="2-3"><h1 class="reveal-container-right-green">{{dataSummary.totalChannels}}</h1> <h5>Channels</h5></div>
-                      <div data-color="3-4"><h1 class="reveal-container-right-green">{{dataSummary.totalDimensions}}</h1> <h5>Dimensions</h5></div>
-                      <div data-color="4-5"><h1 class="reveal-container-right-green">{{dataSummary.totalDimensionInstances}}</h1> <h5>Dimension Instances</h5></div>
-                  </div>
-              </div>
-          </div>
-          <div class="frame col-lg-12" id="frame8" style="flex-direction: column;">
-              <div><h1>What will next year hold?</h1></div>
-              <div><h1>Click <a>here</a> to leverage your data even more.</h1></div>
-          </div>
-        </div>
+    <div class="container">
+        <h3>Kendo Grid Angular 1.x Demo</h3>
+        <h4>{{dashboardLength}} Dashboards</h4>
+        <p>Selected: <span ng-model="selected" ng-repeat="item in selected">{{item.displayInfo}}, </span></p>
+        <!--<kendo-mobile-view>-->
+            <kendo-grid k-options="mainGridOptions" k-rebind="mainGridOptions" ng-if="dashboards"></kendo-grid>
+        <!--</kendo-mobile-view>-->
     </div>
+
     </body>
 </html>

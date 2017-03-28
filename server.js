@@ -16,6 +16,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
+// setup random long list
+
+var length = 0;
+lotsOfData = [];
+
+for (var j = 1; j <= length; j++) {
+    var newRecord = {
+        id: j,
+        displayInfo: {
+            name: "First Name " + j
+        },
+        userPermissions: {
+            owner: {firstName: "Name" + j, lastName: "LastName" + j}
+        },
+        cost:  500000 - j,
+        inStock: 10 + j,
+        dateAdded: new Date ()
+    };
+    lotsOfData.push(newRecord);
+}
+
 
 // routes =================================
 
@@ -51,7 +72,18 @@ app.use(methodOverride());
             if(error){
                 console.log(error);
             }
-            res.send(body);
+
+            var newBody = JSON.parse(body);
+            for(var i=0; i < newBody.length; i++){
+                newBody[i].cost = 10 + i;
+                newBody[i].inStock = 400 - i;
+                newBody[i].dateAdded = new Date(parseInt(newBody[i].dateAdded));
+            }
+            console.log(newBody[1].cost);
+            console.log(newBody[1].inStock);
+            newBody = newBody.concat(lotsOfData);
+            console.log(newBody.length);
+            res.send(newBody);
         });
     });
 
